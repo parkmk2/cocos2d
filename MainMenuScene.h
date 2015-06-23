@@ -21,7 +21,7 @@ public:
     CREATE_FUNC(MainMenu);
 
 protected:
-	enum menuState{start, option, exit};
+	enum menuState { start, option, exit };
 };
 
 #endif // __MainMenu_SCENE_H__

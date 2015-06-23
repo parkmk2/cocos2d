@@ -1,4 +1,5 @@
 #include "MainMenuScene.h"
+#include "OptionScene.h"
 
 USING_NS_CC;
 
@@ -55,7 +56,7 @@ bool MainMenu::init()
 		this, menu_selector(MainMenu::menuFunc));
 	exitMenu->setTag(menuState::exit);
 
-	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+//	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
 
 //	startMenu->setPosition(ccp(origin.x + visibleSize.width/2 - startMenu->getContentSize().width/2 , origin.y + startMenu->getContentSize().height/2));
 
@@ -63,11 +64,15 @@ bool MainMenu::init()
 	CCMenu* pMenu = CCMenu::create(startMenu,optionMenu, exitMenu, NULL);
 	pMenu->alignItemsVerticallyWithPadding(20);
 	pMenu->setPosition(ccp(origin.x + visibleSize.width/2 , origin.y + visibleSize.height/2));
-    this->addChild(pMenu);
 
 	
+	CCSprite* backGround = CCSprite::create("background1.png",CCRect(0,0,visibleSize.width, visibleSize.height));
+	backGround->setPosition(ccp(backGround->getContentSize().width/2,backGround->getContentSize().height/2));
+	this->addChild(backGround);
 
-	this->setTouchEnabled(true);
+	this->addChild(pMenu);
+
+//	this->setTouchEnabled(true);
 
 	//¹è°æÀ½
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("background-music-aac.wav", true);
@@ -87,10 +92,13 @@ void MainMenu::menuFunc(CCObject* pSender)
 	case start:
 		break;
 	case option:
+		{
+		CCScene *pScene = OptionScene::scene();
+		CCDirector::sharedDirector()->replaceScene(pScene);
+		}
 		break;
 	case exit:
 		CCDirector::sharedDirector()->end();
-	default:
 		break;
 	};
 
